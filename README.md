@@ -7,7 +7,8 @@ e.g. `java Combo "1,2,3,4"`
 
 # Logic
 For a given set of numbers, in this example 1, 2, 3, 4, 5 there are the below combinations for combos starting with 1  
-To find the other combinations, the program will need to do a find and replace for each number to replace the next number with the previous number (e.g. the next number after finding the below combos will be 2 and the previous number will be 1) and replacing the first number with the next number
+To find the other combinations, the program will need to do a find and replace for each number to replace the next number with the previous number (e.g. the next number after finding the below combos will be 2 and the previous number will be 1) and replacing the first number with the next number  
+Finding other combinations will require finding and replacing by referencing indexes rather than values (there could be multiple of the same value)
 
 
 `| 1 | 2 | 3 | 4 | 5 |`
