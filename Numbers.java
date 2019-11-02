@@ -36,12 +36,14 @@ public class Numbers
         index[realIndexB] = placeholder1;
     }
 
-    public static int findRealIndex(int a)
+    public int findRealIndex(int a)
     {
         for (int i = 0; i < index.length; i++)
         {
             if (index[i] == a) return i;
         }
+
+        return -1;
     }
 
     public String[] getInput()
