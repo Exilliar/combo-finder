@@ -24,13 +24,24 @@ public class Numbers
 
     public void switchNo(int a, int b)
     {
-        String placeholder0 = input[a];
-        input[a] = input[b];
-        input[b] = placeholder0;
+        int realIndexA = findRealIndex(a);
+        int realIndexB = findRealIndex(b);
 
-        int placeholder1 = index[a];
-        index[a] = index[b];
-        index[b] = placeholder1;
+        String placeholder0 = input[realIndexA];
+        input[realIndexA] = input[realIndexB];
+        input[realIndexB] = placeholder0;
+
+        int placeholder1 = index[realIndexA];
+        index[realIndexA] = index[realIndexB];
+        index[realIndexB] = placeholder1;
+    }
+
+    public static int findRealIndex(int a)
+    {
+        for (int i = 0; i < index.length; i++)
+        {
+            if (index[i] == a) return i;
+        }
     }
 
     public String[] getInput()
