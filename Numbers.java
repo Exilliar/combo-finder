@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Numbers
 {
     String[] input;
@@ -10,7 +12,13 @@ public class Numbers
         index = fillIndexes(input.length);
     }
 
-    public static int[] fillIndexes(int len)
+    public Numbers(String[] inp, int[] ind)
+    {
+        input = inp;
+        index = ind;
+    }
+
+    private static int[] fillIndexes(int len)
     {
         int[] a = new int[len];
 
@@ -36,7 +44,7 @@ public class Numbers
         index[realIndexB] = placeholder1;
     }
 
-    public int findRealIndex(int a)
+    private int findRealIndex(int a)
     {
         for (int i = 0; i < index.length; i++)
         {
@@ -49,5 +57,15 @@ public class Numbers
     public String[] getInput()
     {
         return input;
+    }
+
+    public int[] getIndex()
+    {
+        return index;
+    }
+
+    public int len()
+    {
+        return input.length;
     }
 }
