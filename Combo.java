@@ -13,35 +13,75 @@ class Combo
 
         combos.add(numbers);
 
-        findCombos(0, combos, numbers);
+        findCombos(0, combos, numbers,0);
 
+        System.out.println("finish");
         print(combos);
     }
 
-    private static void findCombos(int i, ArrayList<Numbers> combos, Numbers n)
+    private static void findCombos(int i, ArrayList<Numbers> combos, Numbers n, int numLoops)
     {
+        if (numLoops == 30) return;
+
         Numbers numbers = makeNewNumbers(n);
+
+        System.out.println(i + " : " + Arrays.toString(numbers.getInput()));
+        print(combos);
 
         if (i+1 >= numbers.len())
         {
-            numbers.switchNo(numbers.len()-2, numbers.len()-1);
-            combos.add(numbers);
+            // numbers.switchNo(numbers.len()-2, numbers.len()-1);
+            numbers.switchNoBase(i, i-1);
+            // combos.add(numbers);
+            addCombo(numbers, combos);
+
+            Numbers tempNumbers = makeNewNumbers(numbers);
+
+            tempNumbers.switchNoBase(i, i-2);
+
+            // numbers.switchNo(i-1, i-2);
+            // combos.add(numbers);
+            boolean check = addCombo(tempNumbers, combos);
+
+            if (!check)
+            {
+                System.out.println("caught");
+                Numbers newNumbers = makeNewNumbers(tempNumbers);
+                newNumbers.switchNoBase(i-3, i);
+                addCombo(newNumbers, combos);
+                findCombos(i-3,combos,newNumbers,numLoops+1);
+            }
+            else findCombos(i-2, combos, tempNumbers, numLoops+1);
 
             return;
         }
         else
         {
-            findCombos(i+1,combos,numbers);
+            if (i >= 0)
+            {
+                findCombos(i+1,combos,numbers, numLoops+1);
 
-            numbers.switchNo(i, i+1);
-            combos.add(numbers);
-
-            findCombos(i-1, combos, numbers);
-
-            return;
+                return;
+            }
+            else return;
         }
     }
 
+    private static boolean addCombo(Numbers n, ArrayList<Numbers> combos)
+    {
+        for (Numbers num : combos)
+        {
+            if (Arrays.equals(num.getInput(), n.getInput()))
+            {
+                System.out.println("repeat " + Arrays.toString(num.getInput()));
+                return false;
+            }
+        }
+
+        combos.add(n);
+
+        return true;
+    }
     private static Numbers makeNewNumbers(Numbers n)
     {
         return new Numbers(breakString(n.getInput()), breakInt(n.getIndex()));

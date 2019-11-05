@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Numbers
 {
     String[] input;
@@ -43,6 +41,16 @@ public class Numbers
         index[realIndexA] = index[realIndexB];
         index[realIndexB] = placeholder1;
     }
+    public void switchNoBase(int a, int b)
+    {
+        String placeholder0 = input[a];
+        input[a] = input[b];
+        input[b] = placeholder0;
+
+        int placeholder1 = index[a];
+        index[a] = index[b];
+        index[b] = placeholder1;
+    }
 
     private int findRealIndex(int a)
     {
@@ -50,6 +58,8 @@ public class Numbers
         {
             if (index[i] == a) return i;
         }
+
+        System.out.println("Error in findRealIndex " + a);
 
         return -1;
     }
