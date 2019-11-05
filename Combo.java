@@ -13,20 +13,20 @@ class Combo
 
         combos.add(numbers);
 
-        findCombos(0, combos, numbers,0);
+        findCombos(0, combos, numbers);
 
         System.out.println("finish");
         print(combos);
     }
 
-    private static void findCombos(int i, ArrayList<Numbers> combos, Numbers n, int numLoops)
+    private static void findCombos(int i, ArrayList<Numbers> combos, Numbers n)
     {
-        if (numLoops == 30) return;
-
         Numbers numbers = makeNewNumbers(n);
 
-        System.out.println(i + " : " + Arrays.toString(numbers.getInput()));
-        print(combos);
+        if (combos.size() == numbers.getNumCombos()) return;
+
+        // System.out.println(i + " : " + Arrays.toString(numbers.getInput()));
+        // print(combos);
 
         if (i+1 >= numbers.len())
         {
@@ -45,13 +45,13 @@ class Combo
 
             if (!check)
             {
-                System.out.println("caught");
+                // System.out.println("caught");
                 Numbers newNumbers = makeNewNumbers(tempNumbers);
                 newNumbers.switchNoBase(i-3, i);
                 addCombo(newNumbers, combos);
-                findCombos(i-3,combos,newNumbers,numLoops+1);
+                findCombos(i-3,combos,newNumbers);
             }
-            else findCombos(i-2, combos, tempNumbers, numLoops+1);
+            else findCombos(i-2, combos, tempNumbers);
 
             return;
         }
@@ -59,7 +59,7 @@ class Combo
         {
             if (i >= 0)
             {
-                findCombos(i+1,combos,numbers, numLoops+1);
+                findCombos(i+1,combos,numbers);
 
                 return;
             }
@@ -73,7 +73,7 @@ class Combo
         {
             if (Arrays.equals(num.getInput(), n.getInput()))
             {
-                System.out.println("repeat " + Arrays.toString(num.getInput()));
+                // System.out.println("repeat " + Arrays.toString(num.getInput()));
                 return false;
             }
         }

@@ -2,18 +2,28 @@ public class Numbers
 {
     String[] input;
     int[] index;
+    int numCombos;
 
     public Numbers(String i)
     {
         input = i.split(",");
 
         index = fillIndexes(input.length);
+
+        numCombos = findCombos(input.length);
     }
 
     public Numbers(String[] inp, int[] ind)
     {
         input = inp;
         index = ind;
+        numCombos = findCombos(input.length);
+    }
+
+    private static int findCombos(int len) // factorial function to find total number of combinations
+    {
+        if (len > 0) return findCombos(len-1) * len;
+        else return 1;
     }
 
     private static int[] fillIndexes(int len)
@@ -72,6 +82,11 @@ public class Numbers
     public int[] getIndex()
     {
         return index;
+    }
+
+    public int getNumCombos()
+    {
+        return numCombos;
     }
 
     public int len()
